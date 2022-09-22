@@ -1,8 +1,7 @@
-package com.pa.sobrouemcasa.controller;
+package com.server.sobrouemcasa.controller;
 
-import com.pa.sobrouemcasa.service.DoadorService;
+import com.server.sobrouemcasa.service.DoadorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,5 +11,4 @@ public class DoadorController {
     @Autowired
     private DoadorService doadorService;
 
-    // Testando commit
 }

@@ -1,14 +1,11 @@
-package com.pa.sobrouemcasa.model;
+package com.server.sobrouemcasa.model;
 
-import com.pa.sobrouemcasa.model.enums.GeneroEnum;
-import com.pa.sobrouemcasa.model.enums.TipoUsuarioEnum;
-import lombok.Data;
+import com.server.sobrouemcasa.model.enums.GeneroEnum;
+import com.server.sobrouemcasa.model.enums.TipoUsuarioEnum;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;

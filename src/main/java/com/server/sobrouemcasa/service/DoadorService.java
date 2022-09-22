@@ -1,7 +1,7 @@
-package com.pa.sobrouemcasa.service;
+package com.server.sobrouemcasa.service;
 
-import com.pa.sobrouemcasa.model.Doador;
-import com.pa.sobrouemcasa.repository.DoadorRepository;
+import com.server.sobrouemcasa.model.Doador;
+import com.server.sobrouemcasa.repository.DoadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
