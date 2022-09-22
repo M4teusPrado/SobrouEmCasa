@@ -1,4 +1,4 @@
-package com.pa.sobrouemcasa.model;
+package com.server.sobrouemcasa.model;
 
 import lombok.Data;
 
