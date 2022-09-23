@@ -17,6 +17,7 @@ import java.util.Date;
 public class Doador extends Usuario {
 
     private String descricao;
+    private List<Doacao> doacoes;
 
 
     public Doador(Long id, String nome, String senha, TipoUsuarioEnum tipoUsuario, String cpf, String email, GeneroEnum genero, Date dataNascimento, String telefone, String celular, Endereco endereco, String descricao) {
@@ -25,4 +26,8 @@ public class Doador extends Usuario {
     }
 
     public Doador() {}
+
+    public void addDoacao(Doacao doacao){
+        this.doacoes.add(doacao);
+    }
 }
