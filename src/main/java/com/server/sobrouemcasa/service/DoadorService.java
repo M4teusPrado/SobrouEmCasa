@@ -23,4 +23,9 @@ public class DoadorService {
         Optional<Doador> opDoador = doadorRepository.findById(id);
         return opDoador.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Doador não encontrado"));
     }
+
+    public void deleteDoador(Long id) {
+        getDoadorById(id);
+        doadorRepository.deleteById(id);
+    }
 }

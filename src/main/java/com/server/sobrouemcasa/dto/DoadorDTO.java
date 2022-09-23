@@ -1,6 +1,7 @@
-package com.pa.sobrouemcasa.dto;
+package com.server.sobrouemcasa.dto;
 
-import com.pa.sobrouemcasa.model.Endereco;
+import com.server.sobrouemcasa.model.Endereco;
+import com.server.sobrouemcasa.model.Endereco;
 import lombok.Data;
 
 @Data
