@@ -1,8 +1,8 @@
-package com.pa.sobrouemcasa.model;
+package com.server.sobrouemcasa.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pa.sobrouemcasa.model.enums.GeneroEnum;
-import com.pa.sobrouemcasa.model.enums.TipoUsuarioEnum;
+import com.server.sobrouemcasa.model.enums.GeneroEnum;
+import com.server.sobrouemcasa.model.enums.TipoUsuarioEnum;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +21,11 @@ import java.util.List;
 public class Doador extends Usuario {
 
     private String descricao;
-    private List<Doacao> doacoes;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "doador")
+    @Setter(AccessLevel.NONE)
+    private List<Doacao> doacoes;
 
     public Doador(Long id, String nome, String senha, TipoUsuarioEnum tipoUsuario, String cpf, String email, GeneroEnum genero, Date dataNascimento, String telefone, String celular, Endereco endereco, String descricao) {
         super(id, nome, senha, tipoUsuario, cpf, email, genero, dataNascimento, telefone, celular, endereco);

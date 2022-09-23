@@ -1,8 +1,8 @@
-package com.pa.sobrouemcasa.service;
+package com.server.sobrouemcasa.service;
 
-import com.pa.sobrouemcasa.model.Doacao;
-import com.pa.sobrouemcasa.model.Doador;
-import com.pa.sobrouemcasa.repository.DoacaoRepository;
+import com.server.sobrouemcasa.model.Doacao;
+import com.server.sobrouemcasa.model.Doador;
+import com.server.sobrouemcasa.repository.DoacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

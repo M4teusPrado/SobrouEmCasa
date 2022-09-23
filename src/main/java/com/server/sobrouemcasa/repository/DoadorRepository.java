@@ -1,7 +1,6 @@
-package com.pa.sobrouemcasa.repository;
+package com.server.sobrouemcasa.repository;
 
-import com.pa.sobrouemcasa.model.Doador;
-import com.pa.sobrouemcasa.model.Usuario;
+import com.server.sobrouemcasa.model.Doador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
