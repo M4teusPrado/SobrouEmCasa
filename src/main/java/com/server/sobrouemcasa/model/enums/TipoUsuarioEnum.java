@@ -1,15 +1,14 @@
-package com.pa.sobrouemcasa.model.enums;
+package com.server.sobrouemcasa.model.enums;
 
-public enum GeneroEnum {
+public enum TipoUsuarioEnum {
 
-    MASCULINO(1L, "M"),
-    FEMININO(2L, "F"),
-    OUTROS(3L, "");
+    RESPONSAVEL(1L, "Responsavel"),
+    DOADOR(2L, "Doador");
 
     private Long valor;
     private String descricao;
 
-    GeneroEnum(long valor, String descricao) {
+    TipoUsuarioEnum(long valor, String descricao) {
         this.valor = valor;
         this.descricao = descricao;
     }
@@ -17,8 +16,8 @@ public enum GeneroEnum {
     public Long valor() { return valor;}
     public String descricao() { return descricao;}
 
-    public static GeneroEnum valueOf(Long valor) {
-        for (GeneroEnum v: GeneroEnum.values())
+    public static TipoUsuarioEnum valueOf(Long valor) {
+        for (TipoUsuarioEnum v: TipoUsuarioEnum.values())
             if(v.valor().equals(valor))
                 return v;
         return null;

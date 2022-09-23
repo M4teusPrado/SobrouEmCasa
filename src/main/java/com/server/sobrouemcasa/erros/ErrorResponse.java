@@ -1,4 +1,4 @@
-package com.pa.sobrouemcasa.erros;
+package com.server.sobrouemcasa.erros;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

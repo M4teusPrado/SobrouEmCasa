@@ -1,4 +1,4 @@
-package com.pa.sobrouemcasa.erros;
+package com.server.sobrouemcasa.erros;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
-package com.pa.sobrouemcasa.model;
+package com.server.sobrouemcasa.model;
 
-import com.pa.sobrouemcasa.model.enums.Categoria;
+import com.server.sobrouemcasa.model.enums.Categoria;
 import lombok.Getter;
 import lombok.Setter;
 

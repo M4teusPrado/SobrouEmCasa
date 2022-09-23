@@ -1,7 +1,7 @@
-package com.pa.sobrouemcasa.service;
+package com.server.sobrouemcasa.service;
 
-import com.pa.sobrouemcasa.model.Doador;
-import com.pa.sobrouemcasa.repository.DoadorRepository;
+import com.server.sobrouemcasa.model.Doador;
+import com.server.sobrouemcasa.repository.DoadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,5 +22,10 @@ public class DoadorService {
     public Doador getDoadorById(Long id) {
         Optional<Doador> opDoador = doadorRepository.findById(id);
         return opDoador.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Doador não encontrado"));
+    }
+
+    public void deleteDoador(Long id) {
+        getDoadorById(id);
+        doadorRepository.deleteById(id);
     }
 }

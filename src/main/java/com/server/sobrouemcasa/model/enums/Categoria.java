@@ -1,4 +1,4 @@
-package com.pa.sobrouemcasa.model.enums;
+package com.server.sobrouemcasa.model.enums;
 
 public enum Categoria {
 
