@@ -31,4 +31,9 @@ public class DoacaoService {
         Optional<Doacao> opDoacao = doacaoRepository.findById(id);
         return opDoacao.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Doacao  não encontrado"));
     }
+
+    public void deleteDoacao(Long id) {
+        getDoacaoById(id);
+        doacaoRepository.deleteById(id);
+    }
 }
