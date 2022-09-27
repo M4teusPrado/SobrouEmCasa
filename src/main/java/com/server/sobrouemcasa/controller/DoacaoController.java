@@ -28,7 +28,7 @@ public class DoacaoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Doacao> updateDoador(@PathVariable Long id,  @RequestBody DoacaoDTO doacao) {
+    public ResponseEntity<Doacao> updateDoacao(@PathVariable Long id,  @RequestBody DoacaoDTO doacao) {
         return ResponseEntity.ok().body(doacaoService.updateDoacao(id,doacao));
     }
 }
