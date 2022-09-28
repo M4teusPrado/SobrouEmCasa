@@ -4,10 +4,12 @@ import com.server.sobrouemcasa.model.Ong;
 import com.server.sobrouemcasa.model.Usuario;
 import com.server.sobrouemcasa.repository.OngRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 import java.util.Optional;
 
+@Service
 public class OngService {
 
 

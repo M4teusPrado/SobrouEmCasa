@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/doacao")
 public class DoacaoController {
 
-
     @Autowired
     private DoacaoService doacaoService;
-
 
     @GetMapping("{id}")
     public ResponseEntity<Doacao> getDoacaoById(@PathVariable Long id){
