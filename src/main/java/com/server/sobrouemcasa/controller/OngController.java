@@ -17,4 +17,12 @@ public class OngController {
     public ResponseEntity<Ong> cadastroDoacao(@PathVariable Long id, @RequestBody Ong ong) {
         return ResponseEntity.ok().body(ongService.cadastrarOng(id,ong));
     }
+
+
+
+    
+    @GetMapping("{id}")
+    public ResponseEntity<Ong> getOngId(@PathVariable Long id){
+        return ResponseEntity.ok().body(ongService.getOngById(id));
+    }
 }

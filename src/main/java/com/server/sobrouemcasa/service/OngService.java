@@ -4,7 +4,8 @@ import com.server.sobrouemcasa.model.Ong;
 import com.server.sobrouemcasa.model.Usuario;
 import com.server.sobrouemcasa.repository.OngRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 import java.util.Optional;
 
 public class OngService {
@@ -21,5 +22,16 @@ public class OngService {
 
         usuario.ifPresent(ong::setUsuario);
         return ongRepository.save(ong);
+    }
+
+   
+
+
+
+
+    
+    public Ong getOngById(Long id) {
+        Optional<Ong> opOng = ongRepository.findById(id);
+        return opOng.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "ONG  não encontrada"));
     }
 }
