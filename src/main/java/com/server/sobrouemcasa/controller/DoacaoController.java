@@ -1,5 +1,6 @@
 package com.server.sobrouemcasa.controller;
 
+import com.server.sobrouemcasa.dto.DoacaoDTO;
 import com.server.sobrouemcasa.model.Doacao;
 import com.server.sobrouemcasa.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,10 @@ public class DoacaoController {
     public ResponseEntity<Void> deleteDoacao(@PathVariable Long id) {
         doacaoService.deleteDoacao(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Doacao> updateDoacao(@PathVariable Long id,  @RequestBody DoacaoDTO doacao) {
+        return ResponseEntity.ok().body(doacaoService.updateDoacao(id,doacao));
     }
 }
