@@ -19,11 +19,16 @@ public class DoadorService {
     public Doador cadastrarDoador(Doador doador) {
         return doadorRepository.save(doador);
     }
+
     public Doador getDoadorById(Long id) {
         Optional<Doador> opDoador = doadorRepository.findById(id);
         return opDoador.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Doador não encontrado"));
     }
 
+    public void deleteDoador(Long id) {
+        getDoadorById(id);
+        doadorRepository.deleteById(id);
+    }
     public Doador updateDoador(Long id, DoadorDTO doadorDTO) {
         Doador doador = getDoadorById(id);
         setValuesDTO(doadorDTO, doador);

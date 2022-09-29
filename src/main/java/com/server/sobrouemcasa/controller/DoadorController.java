@@ -14,6 +14,20 @@ public class DoadorController {
     @Autowired
     private DoadorService doadorService;
 
+    @Autowired
+    private DoacaoService doacaoService;
+
+    @PostMapping("{id}/doacao")
+    public ResponseEntity<Doacao> cadastroDoacao(@PathVariable Long id, @RequestBody Doacao doacao) {
+        return ResponseEntity.ok().body(doacaoService.cadastrarDoacao(id,doacao));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteDoador(@PathVariable Long id) {
+        doadorService.deleteDoador(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<Doador> updateDoador(@PathVariable Long id, @RequestBody DoadorDTO doador) {
         return ResponseEntity.ok().body(doadorService.updateDoador(id,doador));
