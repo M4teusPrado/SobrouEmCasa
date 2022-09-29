@@ -29,4 +29,9 @@ public class OngController {
         ongService.deleteOng(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Ong> updateDoacao(@PathVariable Long id,  @RequestBody Ong ong) {
+        return ResponseEntity.ok().body(ongService.updateOng(id,ong));
+    }
 }

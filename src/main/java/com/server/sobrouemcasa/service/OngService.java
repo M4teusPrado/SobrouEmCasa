@@ -12,7 +12,6 @@ import java.util.Optional;
 @Service
 public class OngService {
 
-
     @Autowired
     private OngRepository ongRepository;
 
@@ -34,5 +33,16 @@ public class OngService {
     public Ong getOngById(Long id) {
         Optional<Ong> opOng = ongRepository.findById(id);
         return opOng.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "ONG  não encontrada"));
+    }
+
+    public Ong updateOng(Long id, Ong ong) {
+        Ong ongAntes = getOngById(id);
+        ongAntes.setCnpj(ong.getCnpj());
+        ongAntes.setDataConstitucional(ong.getDataConstitucional());
+        ongAntes.setEmail(ong.getEmail());
+        ongAntes.setFinalidadeInstitucional(ong.getFinalidadeInstitucional());
+        ongAntes.setUsuario(ong.getUsuario());
+
+        return ongRepository.save(ongAntes);
     }
 }
