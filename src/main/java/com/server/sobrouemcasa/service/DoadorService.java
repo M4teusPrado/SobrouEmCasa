@@ -1,5 +1,6 @@
 package com.server.sobrouemcasa.service;
 
+import com.server.sobrouemcasa.dto.DoadorDTO;
 import com.server.sobrouemcasa.model.Doador;
 import com.server.sobrouemcasa.repository.DoadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,16 @@ public class DoadorService {
     public void deleteDoador(Long id) {
         getDoadorById(id);
         doadorRepository.deleteById(id);
+    }
+    public Doador updateDoador(Long id, DoadorDTO doadorDTO) {
+        Doador doador = getDoadorById(id);
+        setValuesDTO(doadorDTO, doador);
+        return cadastrarDoador(doador);
+    }
+    public void setValuesDTO(DoadorDTO doadorDTO, Doador doador) {
+        if(doadorDTO.getNome() != null) doador.setNome(doadorDTO.getNome());
+        if(doadorDTO.getDescricao() != null) doador.setDescricao(doadorDTO.getDescricao());
+        if(doadorDTO.getEndereco() != null) doador.setEndereco(doadorDTO.getEndereco());
+        if(doadorDTO.getSenha() != null) doador.setSenha(doadorDTO.getSenha());
     }
 }
