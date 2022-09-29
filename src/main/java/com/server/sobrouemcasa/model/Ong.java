@@ -12,66 +12,21 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Ong {
+@PrimaryKeyJoinColumn(name="USER_ID")
+public class Ong extends Usuario {
 
-
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private String nomeInstituicao;
     private String cnpj;
     private String finalidadeInstitucional;
-    private Date dataConstitucional;
-    private String email;
-    private Usuario usuario;
+    private Date dataConstituicao;
 
     public Ong() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
+    public Ong(Long id, String nome, String senha, TipoUsuarioEnum tipoUsuario, String cpf, String email, GeneroEnum genero, Date dataNascimento, String telefone, String celular, Endereco endereco, String nomeInstituicao, String cnpj, String finalidadeInstitucional, Date dataConstituicao) {
+        super(id, nome, senha, tipoUsuario, cpf, email, genero, dataNascimento, telefone, celular, endereco);
+        this.nomeInstituicao = nomeInstituicao;
         this.cnpj = cnpj;
-    }
-
-    public String getFinalidadeInstitucional() {
-        return finalidadeInstitucional;
-    }
-
-    public void setFinalidadeInstitucional(String finalidadeInstitucional) {
         this.finalidadeInstitucional = finalidadeInstitucional;
-    }
-
-    public Date getDataConstitucional() {
-        return dataConstitucional;
-    }
-
-    public void setDataConstitucional(Date dataConstitucional) {
-        this.dataConstitucional = dataConstitucional;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+        this.dataConstituicao = dataConstituicao;
     }
 }
