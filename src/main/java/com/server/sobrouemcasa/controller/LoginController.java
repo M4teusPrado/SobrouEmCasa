@@ -29,7 +29,7 @@ public class LoginController {
         return ResponseEntity.ok().body(doadorService.cadastrarDoador(doador));
     }
 
-    @PostMapping("cadastrar/pj")
+    @PostMapping("/cadastrar/pj")
     public ResponseEntity<Ong> cadastrar(@Valid @RequestBody Ong ong) {
         return ResponseEntity.ok().body(ongService.cadastroOng(ong));
     }
