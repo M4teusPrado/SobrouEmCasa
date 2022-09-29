@@ -1,7 +1,6 @@
 package com.server.sobrouemcasa.service;
 
 import com.server.sobrouemcasa.model.Ong;
-import com.server.sobrouemcasa.model.Usuario;
 import com.server.sobrouemcasa.repository.OngRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,12 @@ public class OngService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public Ong cadastrarOng(Long idDoador, Ong ong) {
-        Optional<Usuario> usuario = usuarioService.getUsuarioById(idDoador);
-
-        usuario.ifPresent(ong::setUsuario);
+    public Ong saveOng(Ong ong) {
         return ongRepository.save(ong);
+    }
+
+    public Ong cadastroOng(Ong ong) {
+        return saveOng(ong);
     }
 
     public void deleteOng(Long id) {
@@ -38,10 +38,9 @@ public class OngService {
     public Ong updateOng(Long id, Ong ong) {
         Ong ongAntes = getOngById(id);
         ongAntes.setCnpj(ong.getCnpj());
-        ongAntes.setDataConstitucional(ong.getDataConstitucional());
+        ongAntes.setDataConstituicao(ong.getDataConstituicao());
         ongAntes.setEmail(ong.getEmail());
         ongAntes.setFinalidadeInstitucional(ong.getFinalidadeInstitucional());
-        ongAntes.setUsuario(ong.getUsuario());
 
         return ongRepository.save(ongAntes);
     }
