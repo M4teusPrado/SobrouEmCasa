@@ -19,10 +19,14 @@ public class OngController {
     }
 
 
-
-    
     @GetMapping("{id}")
     public ResponseEntity<Ong> getOngId(@PathVariable Long id){
         return ResponseEntity.ok().body(ongService.getOngById(id));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteOng(@PathVariable Long id) {
+        ongService.deleteOng(id);
+        return ResponseEntity.noContent().build();
     }
 }

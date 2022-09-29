@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface DoadorRepository extends JpaRepository<Doador, Long> {
     Optional<Doador> findById(Long id);
 
-
 }

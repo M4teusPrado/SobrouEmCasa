@@ -26,6 +26,11 @@ public class OngService {
         return ongRepository.save(ong);
     }
 
+    public void deleteOng(Long id) {
+        getOngById(id);
+        ongRepository.deleteById(id);
+    }
+    
     public Ong getOngById(Long id) {
         Optional<Ong> opOng = ongRepository.findById(id);
         return opOng.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "ONG  não encontrada"));
