@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,4 +54,10 @@ public class DoacaoService {
         if(doacaoDTO.getNome() != null) doacao.setNome(doacaoDTO.getNome());
         if(doacaoDTO.getDescricao() != null) doacao.setDescricao(doacaoDTO.getDescricao());
     }
+
+    public List<Doacao> getAllDoacoes() {
+        List<Doacao> doacoes = doacaoRepository.findAll();
+        return doacoes;
+    }
+
 }
