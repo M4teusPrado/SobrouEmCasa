@@ -1,7 +1,7 @@
 
-# SobrouEmCasa.API
-
-## Métodos
+# SobrouEmCasa 🏡
+   
+## Métodos ⚙️
 Requisições para a API devem seguir os padrões:
 | Método | Descrição |
 |---|---|
@@ -25,7 +25,7 @@ Requisições para a API devem seguir os padrões:
 | `429` | Número máximo de requisições atingido. (*aguarde alguns segundos e tente novamente*)|
 
 
-# Documentação
+# Documentação 📚
 
 ## Requisitos para compilação
 
@@ -99,7 +99,7 @@ Clone [https://github.com/M4teusPrado/SobrouEmCasa.API.git](https://github.com/M
 
 Agora bastar apertar com o botão direito do mouse em sua interface, e clicar em run 
 
-### Arquitetura do projeto
+### Arquitetura do projeto 👷🛠️
 
 Controller: Recebe requisições do usuário e repassa ao service
 
@@ -188,7 +188,7 @@ Rota destinada para cadastrar um novo usuario, do tipo PJ
  -  Verifica se o Email enviado ja existe em base de dados
 
 
-# Doador
+# Entidade Doador ❤️
 
 ## doador [url/doador/{id}]
 
@@ -289,3 +289,35 @@ Rota destinada para obter um usuario
               "trace": "org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND \"Usuario não encontrado\"
           }
 
+
+
+## Boas práticas 💻
+
+### 1 - Atualização JIRA
+
+ - O desenvolvedor deverá, sempre que finalizado, mover seu card ao devido status na plataforma Jira
+
+### 2 - Usar branchs no github
+
+ - Nunca deve-se desenvolver usando a main. Deve-se realizar um pull da branch develop e ser criado uma nova branch para cada card. Com a branch nova, fica mais fácil de ser realizado o code review e correções necessárias.
+
+### 3 - Respeitar a arquitetura estipulada
+
+ - O projeto foi desenvolvido e organizado em camadas, com a camada controller, service e repository. Cada camada possui sua função e o desenvolvedor deve respeitar e separar seus códigos.
+
+### 4 - Respeitar a due date
+- O desenvolvedor deverá se atentar ao prazo dado ao seu respectivo card e deverá cumprir. Qualquer impedimento que atrapalhe a due date deve ser repassado ao seu superior.
+
+### 5 - Respeitar o conceito Single-Responsability Principle
+- O desenvolvedor sempre que implementar uma classe, ela deve obeceder os primórdios da Single-Responsability Principle. Que afirma que "o módulo deve ser responsável por um, e apenas um, ator".
+
+
+## Passagem para produção ♻️
+
+Para realizar a passagem para produção:
+
+ a) Alterar apontamento do banco de dados __test__ para __prod__
+ 
+ b) Realizar Merge da develop para master
+ 
+ 
