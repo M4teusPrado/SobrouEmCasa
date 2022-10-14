@@ -1,6 +1,8 @@
 package com.server.sobrouemcasa.controller;
 
+import com.google.gson.Gson;
 import com.server.sobrouemcasa.model.Doador;
+import com.server.sobrouemcasa.model.Endereco;
 import com.server.sobrouemcasa.model.Ong;
 import com.server.sobrouemcasa.model.Usuario;
 import com.server.sobrouemcasa.service.DoadorService;
@@ -13,6 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 @RestController
 @RequestMapping("/login")
@@ -25,7 +34,18 @@ public class LoginController {
     private OngService ongService;
 
     @PostMapping("/cadastrar/pf")
-    public ResponseEntity<Doador> cadastrar(@Valid @RequestBody Doador doador) {
+    public ResponseEntity<Doador> cadastrar(@Valid @RequestBody Doador doador) throws IOException {
+
+        URL url = new URL("https://viacep.com.br/ws/"+doador.getEndereco().getCep()+"/json/");
+        URLConnection connection = url.openConnection();
+        InputStream is = connection.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        StringBuilder jsonCep = new StringBuilder();
+        String buffer = "";
+        while ((buffer = br.readLine()) != null)
+            jsonCep.append(buffer);
+
+        doador.setEndereco(new Gson().fromJson(String.valueOf(jsonCep), Endereco.class));
         return ResponseEntity.ok().body(doadorService.cadastrarDoador(doador));
     }
 
