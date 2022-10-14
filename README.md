@@ -99,7 +99,7 @@ Clone [https://github.com/M4teusPrado/SobrouEmCasa.API.git](https://github.com/M
 
 Agora bastar apertar com o botão direito do mouse em sua interface, e clicar em run 
 
-### Arquitetura do projeto 👷🛠️
+## Arquitetura do projeto 👷🛠️
 
 Controller: Recebe requisições do usuário e repassa ao service
 
