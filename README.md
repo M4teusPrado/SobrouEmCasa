@@ -115,23 +115,6 @@ Repository: Tem como funcionalidade salvar armazenar entidades
 
 
 
-# Login
-
-## usuarios [url/logar]
-
-Rota destinada para autenticação de login 
-
-### LOGAR [POST]
-
-+ Response 200 (application/json)
-
-        {
-            "email": "mateus.silvaprado@gmail.com",
-            "senha": "123"
-        }
-
-
-          
 ## usuarios [url/cadastrar/pf]
 
 Rota destinada para cadastrar um novo usuario, do tipo doador
