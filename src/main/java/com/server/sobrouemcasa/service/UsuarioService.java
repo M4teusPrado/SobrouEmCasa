@@ -31,5 +31,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    public Optional<Usuario> getDoadorByEmail(String email, String senha) { return usuarioRepository.findById(id);}
+
     public Optional<Usuario> getUsuarioById(Long id) { return usuarioRepository.findById(id);}
 }
