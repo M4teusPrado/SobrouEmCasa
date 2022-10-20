@@ -19,7 +19,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -35,8 +34,19 @@ public class LoginController {
 
     @PostMapping("/cadastrar/pf")
     public ResponseEntity<Doador> cadastrar(@Valid @RequestBody Doador doador) throws IOException {
+        integracaoViaCep(doador);
+        return ResponseEntity.ok().body(doadorService.cadastrarDoador(doador));
+    }
 
-        URL url = new URL("https://viacep.com.br/ws/"+doador.getEndereco().getCep()+"/json/");
+    @PostMapping("/cadastrar/pj")
+    public ResponseEntity<Ong> cadastrar(@Valid @RequestBody Ong ong) throws IOException {
+        integracaoViaCep(ong);
+        return ResponseEntity.ok().body(ongService.cadastroOng(ong));
+    }
+
+    private void integracaoViaCep(Usuario usuario) throws IOException {
+
+        URL url = new URL("https://viacep.com.br/ws/" + usuario.getEndereco().getCep() + "/json/");
         URLConnection connection = url.openConnection();
         InputStream is = connection.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
@@ -44,13 +54,6 @@ public class LoginController {
         String buffer = "";
         while ((buffer = br.readLine()) != null)
             jsonCep.append(buffer);
-
-        doador.setEndereco(new Gson().fromJson(String.valueOf(jsonCep), Endereco.class));
-        return ResponseEntity.ok().body(doadorService.cadastrarDoador(doador));
-    }
-
-    @PostMapping("/cadastrar/pj")
-    public ResponseEntity<Ong> cadastrar(@Valid @RequestBody Ong ong) {
-        return ResponseEntity.ok().body(ongService.cadastroOng(ong));
+        usuario.setEndereco(new Gson().fromJson(String.valueOf(jsonCep), Endereco.class));
     }
 }
