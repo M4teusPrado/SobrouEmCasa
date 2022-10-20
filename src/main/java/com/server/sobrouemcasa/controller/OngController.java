@@ -19,9 +19,10 @@ public class OngController {
     @Autowired
     private OngService ongService;
 
-    @GetMapping("{id}")
-    public ResponseEntity<List<RetFiltroDoacaoDTO>> getDoacaoByDistance(Long idOng, int filtroKM) throws ApiException, InterruptedException, IOException{
-        return ResponseEntity.ok().body(ongService.getDoacaoByDistance(idOng, filtroKM));
+
+    @GetMapping("{id}/filtro")
+    public ResponseEntity<List<RetFiltroDoacaoDTO>> getDoacao(@PathVariable Long id, @RequestParam(value = "distancia") int distancia ) throws Exception {
+        return ResponseEntity.ok(ongService.getDoacaoByDistance(id, distancia));
     }
 
     @GetMapping("{id}")

@@ -71,7 +71,7 @@ public class OngService {
         //Ong que será considerada no filtro
         Ong ong = getOngById(idOng);
 
-        String enderecoOng = ong.getEndereco().getRua() + ", " + ong.getEndereco().getNumero();
+        String enderecoOng = ong.getEndereco().getLogradouro() + ", " + ong.getEndereco().getNumero();
         GeocodingResult[] resultsOng =  GeocodingApi.geocode(context, enderecoOng).await();
 
         Double latOng = resultsOng[0].geometry.location.lat;
@@ -85,7 +85,7 @@ public class OngService {
         List<RetFiltroDoacaoDTO> doacoesFiltradas = new ArrayList<RetFiltroDoacaoDTO>();
 
         for(Doacao doacao : doacoes){
-            String enderecoDoacao = doacao.getDoador().getEndereco().getRua() + ", " + doacao.getDoador().getEndereco().getNumero();
+            String enderecoDoacao = doacao.getDoador().getEndereco().getLogradouro() + ", " + doacao.getDoador().getEndereco().getNumero();
             GeocodingResult[] resultsDoacao =  GeocodingApi.geocode(context, enderecoDoacao).await();
             
             Gson gsonDoacao = new GsonBuilder().setPrettyPrinting().create();
@@ -93,8 +93,10 @@ public class OngService {
 
             Double latDoacao = resultsDoacao[0].geometry.location.lat;
             Double lngDoacao = resultsDoacao[0].geometry.location.lng;
-            
+
+            //111.1 -- Graus para KM
             Double difLat = Math.abs(latOng - latDoacao) * 111.1;
+            //96.2 -- Graus para KM
             Double difLng = Math.abs(lngOng - lngDoacao) * 96.2;
 
             Double distPontos = Math.sqrt(Math.pow(difLat, 2) + Math.pow(difLng, 2));
