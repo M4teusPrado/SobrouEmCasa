@@ -18,9 +18,13 @@ public class Endereco {
     private Long id;
 
     private String cep;
-    private String estado;
-    private String cidade;
+    private String logradouro;
+    private String complemento;
     private String bairro;
-    private String rua;
-    private long numero;
+    private String localidade;
+    private String uf;
+    private String ibge;
+    private String gia;
+    private String ddd;
+    private String siafi;
 }
