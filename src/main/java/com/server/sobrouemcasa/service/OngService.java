@@ -1,5 +1,12 @@
 package com.server.sobrouemcasa.service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.errors.ApiException;
+import com.google.maps.model.GeocodingResult;
+import com.google.maps.model.LatLng;
 import com.server.sobrouemcasa.dto.RetFiltroDoacaoDTO;
 import com.server.sobrouemcasa.model.Doacao;
 import com.server.sobrouemcasa.model.Ong;
@@ -10,8 +17,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.lang.Math;
 
 @Service
 public class OngService {
@@ -54,19 +64,47 @@ public class OngService {
         return ongRepository.save(ongAntes);
     }
 
-    public List<RetFiltroDoacaoDTO> buscaDoacaoPorDistancia(Long idOng, int filtroKM){
+    public List<RetFiltroDoacaoDTO> getDoacaoByDistance(Long idOng, int filtroKM) throws ApiException, InterruptedException, IOException{
+        
+        GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyBSPbsdPrzd9w6chbNpIXqQ4-cj29hHjk8").build();
         
         //Ong que será considerada no filtro
         Ong ong = getOngById(idOng);
-        //Variavel auxiliar para armazenar o resultado do calculo da distancia ONG->Doação
-        Float distancia;
+
+        String enderecoOng = ong.getEndereco().getRua() + ", " + ong.getEndereco().getNumero();
+        GeocodingResult[] resultsOng =  GeocodingApi.geocode(context, enderecoOng).await();
+
+        Double latOng = resultsOng[0].geometry.location.lat;
+        Double lngOng = resultsOng[0].geometry.location.lng;
+
+        Gson gsonOng = new GsonBuilder().setPrettyPrinting().create();
+        System.out.println(gsonOng.toJson(resultsOng[0].addressComponents));
+
         //Lista de doações armazenadas
         List<Doacao> doacoes = doacaoService.getAllDoacoes();
+        List<RetFiltroDoacaoDTO> doacoesFiltradas = new ArrayList<RetFiltroDoacaoDTO>();
 
         for(Doacao doacao : doacoes){
+            String enderecoDoacao = doacao.getDoador().getEndereco().getRua() + ", " + doacao.getDoador().getEndereco().getNumero();
+            GeocodingResult[] resultsDoacao =  GeocodingApi.geocode(context, enderecoDoacao).await();
             
+            Gson gsonDoacao = new GsonBuilder().setPrettyPrinting().create();
+            System.out.println(gsonDoacao.toJson(resultsDoacao[0].addressComponents));
+
+            Double latDoacao = resultsDoacao[0].geometry.location.lat;
+            Double lngDoacao = resultsDoacao[0].geometry.location.lng;
+            
+            Double difLat = Math.abs(latOng - latDoacao) * 111.1;
+            Double difLng = Math.abs(lngOng - lngDoacao) * 96.2;
+
+            Double distPontos = Math.sqrt(Math.pow(difLat, 2) + Math.pow(difLng, 2));
+
+            if(distPontos <= filtroKM){
+                RetFiltroDoacaoDTO doacaoFiltrada = new RetFiltroDoacaoDTO(doacao, distPontos);
+                doacoesFiltradas.add(doacaoFiltrada);
+            }
         }
 
-        return null;
+        return doacoesFiltradas;
     }
 }
