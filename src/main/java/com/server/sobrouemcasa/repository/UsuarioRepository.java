@@ -1,6 +1,7 @@
 package com.server.sobrouemcasa.repository;
 
 import com.server.sobrouemcasa.model.Usuario;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,4 +16,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findById(Long id);
 
     Optional<Usuario> findByCpf(String cpf);
+
 }
