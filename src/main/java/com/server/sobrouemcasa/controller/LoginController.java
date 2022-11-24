@@ -31,8 +31,8 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping
-    public  ResponseEntity<Usuario> login(Usuario usuario){
+    @PostMapping()
+    public  ResponseEntity<Usuario> login(@RequestBody Usuario usuario){
         return ResponseEntity.ok().body(loginService.loginUsuario(usuario.getEmail(), usuario.getSenha()));
     }
 
@@ -56,14 +56,18 @@ public class LoginController {
 
     private void integracaoViaCep(Usuario usuario) throws IOException {
 
+
+        String numeroLogradouro = usuario.getEndereco().getNumero();
         URL url = new URL("https://viacep.com.br/ws/" + usuario.getEndereco().getCep() + "/json/");
         URLConnection connection = url.openConnection();
         InputStream is = connection.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         StringBuilder jsonCep = new StringBuilder();
         String buffer = "";
-        while ((buffer = br.readLine()) != null)
+        while ((buffer = br.readLine()) != null) {
             jsonCep.append(buffer);
+        }
         usuario.setEndereco(new Gson().fromJson(String.valueOf(jsonCep), Endereco.class));
+        usuario.getEndereco().setNumero(numeroLogradouro);
     }
 }

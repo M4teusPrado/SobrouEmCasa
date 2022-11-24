@@ -35,7 +35,6 @@ public class OngService {
     @Autowired
     private DoacaoService doacaoService;
 
-
     public Ong saveOng(Ong ong) {
         return ongRepository.save(ong);
     }
@@ -77,9 +76,6 @@ public class OngService {
         Double latOng = resultsOng[0].geometry.location.lat;
         Double lngOng = resultsOng[0].geometry.location.lng;
 
-        Gson gsonOng = new GsonBuilder().setPrettyPrinting().create();
-        System.out.println(gsonOng.toJson(resultsOng[0].addressComponents));
-
         //Lista de doações armazenadas
         List<Doacao> doacoes = doacaoService.getAllDoacoes();
         List<RetFiltroDoacaoDTO> doacoesFiltradas = new ArrayList<RetFiltroDoacaoDTO>();
@@ -87,26 +83,15 @@ public class OngService {
         for(Doacao doacao : doacoes){
             String enderecoDoacao = doacao.getDoador().getEndereco().getLogradouro() + ", " + doacao.getDoador().getEndereco().getNumero();
             GeocodingResult[] resultsDoacao =  GeocodingApi.geocode(context, enderecoDoacao).await();
-            
-            Gson gsonDoacao = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println(gsonDoacao.toJson(resultsDoacao[0].addressComponents));
-
             Double latDoacao = resultsDoacao[0].geometry.location.lat;
             Double lngDoacao = resultsDoacao[0].geometry.location.lng;
-
-            //111.1 -- Graus para KM
             Double difLat = Math.abs(latOng - latDoacao) * 111.1;
-            //96.2 -- Graus para KM
             Double difLng = Math.abs(lngOng - lngDoacao) * 96.2;
-
             Double distPontos = Math.sqrt(Math.pow(difLat, 2) + Math.pow(difLng, 2));
 
-            if(distPontos <= filtroKM){
-                RetFiltroDoacaoDTO doacaoFiltrada = new RetFiltroDoacaoDTO(doacao, distPontos);
-                doacoesFiltradas.add(doacaoFiltrada);
-            }
+            if(distPontos <= filtroKM)
+                doacoesFiltradas.add(new RetFiltroDoacaoDTO(doacao, distPontos));
         }
-
         return doacoesFiltradas;
     }
 }
