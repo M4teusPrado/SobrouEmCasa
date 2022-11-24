@@ -1,7 +1,6 @@
 package com.server.sobrouemcasa.service;
 
 import com.server.sobrouemcasa.dto.DoacaoDTO;
-import com.server.sobrouemcasa.dto.DoadorDTO;
 import com.server.sobrouemcasa.model.Doacao;
 import com.server.sobrouemcasa.model.Doador;
 import com.server.sobrouemcasa.repository.DoacaoRepository;

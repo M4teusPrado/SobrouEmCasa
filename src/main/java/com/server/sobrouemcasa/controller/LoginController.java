@@ -5,10 +5,7 @@ import com.server.sobrouemcasa.model.Doador;
 import com.server.sobrouemcasa.model.Endereco;
 import com.server.sobrouemcasa.model.Ong;
 import com.server.sobrouemcasa.model.Usuario;
-import com.server.sobrouemcasa.service.DoadorService;
-import com.server.sobrouemcasa.service.LoginService;
-import com.server.sobrouemcasa.service.OngService;
-import com.server.sobrouemcasa.service.UsuarioService;
+import com.server.sobrouemcasa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,22 +22,20 @@ import java.net.URLConnection;
 @RequestMapping("/login")
 public class LoginController {
 
-    @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private LoginService loginService;
-
-    @PostMapping()
-    public  ResponseEntity<Usuario> login(@RequestBody Usuario usuario){
-        return ResponseEntity.ok().body(loginService.loginUsuario(usuario.getEmail(), usuario.getSenha()));
-    }
 
     @Autowired
     private DoadorService doadorService;
 
     @Autowired
     private OngService ongService;
+
+    @Autowired
+    private InterfaceLoginService loginService;
+
+    @PostMapping()
+    public  ResponseEntity<Usuario> login(@RequestBody Usuario usuario){
+        return ResponseEntity.ok().body(loginService.login(usuario.getEmail(), usuario.getSenha()));
+    }
 
     @PostMapping("/cadastrar/pf")
     public ResponseEntity<Doador> cadastrar(@Valid @RequestBody Doador doador) throws IOException {
@@ -70,4 +65,7 @@ public class LoginController {
         usuario.setEndereco(new Gson().fromJson(String.valueOf(jsonCep), Endereco.class));
         usuario.getEndereco().setNumero(numeroLogradouro);
     }
+
+
+
 }
