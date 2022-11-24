@@ -22,7 +22,6 @@ import java.net.URLConnection;
 @RequestMapping("/login")
 public class LoginController {
 
-
     @Autowired
     private DoadorService doadorService;
 
@@ -30,7 +29,7 @@ public class LoginController {
     private OngService ongService;
 
     @Autowired
-    private InterfaceLoginService loginService;
+    private LoginService loginService;
 
     @PostMapping()
     public  ResponseEntity<Usuario> login(@RequestBody Usuario usuario){

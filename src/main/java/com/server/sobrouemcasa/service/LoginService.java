@@ -10,12 +10,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
-public class LoginService implements InterfaceLoginService {
+public class LoginService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @Override
     public Usuario login(String email, String senha) {
         Optional<Usuario> opUsuario = usuarioRepository.findOneByEmailIgnoreCaseAndSenha(email, senha);
         return opUsuario.orElseThrow( () -> new ResponseStatusException( HttpStatus.NOT_FOUND, "Usuário ou senha incorretos"));
