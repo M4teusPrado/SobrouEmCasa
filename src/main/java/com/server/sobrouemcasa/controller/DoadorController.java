@@ -36,7 +36,7 @@ public class DoadorController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Doador> getDoadorById(@PathVariable Long id){
-        return ResponseEntity.ok().body(doadorService.getDoadorById(id));
+    public ResponseEntity<DoadorDTO> getDoadorById(@PathVariable Long id){
+        return ResponseEntity.ok().body(new DoadorDTO(doadorService.getDoadorById(id)));
     }
 }

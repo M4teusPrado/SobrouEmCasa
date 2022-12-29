@@ -1,15 +1,20 @@
 package com.server.sobrouemcasa.model;
 
-import com.server.sobrouemcasa.model.enums.GeneroEnum;
-import com.server.sobrouemcasa.model.enums.TipoUsuarioEnum;
+import com.server.sobrouemcasa.model.enums.Genero;
+import com.server.sobrouemcasa.model.enums.TipoUsuario;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Entity
 @Getter
@@ -23,14 +28,17 @@ public class Usuario implements Serializable {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "{nome.not.blank}")
+    @NotBlank(message = "Nome não deve estar em branco.")
+    @Size(min = 3, max = 40, message = "Nome deve conter no minimo 4 e no maximo 40 caracteres")
     private String nome;
     private String senha;
-    private TipoUsuarioEnum tipoUsuario;
-    private String cpf;
-    @NotBlank(message = "{email.not.blank}")
+    private TipoUsuario tipoUsuario;
+    private Long cpf;
+
+    @NotBlank(message = "E-mail não deve estar em branco.")
+    @Email(message = "Endereço de e-mail inválido.")
     private String email;
-    private GeneroEnum genero;
+    private Genero genero;
     private Date dataNascimento;
     private String telefone;
     private String celular;
@@ -42,10 +50,10 @@ public class Usuario implements Serializable {
             Long id,
             String nome,
             String senha,
-            TipoUsuarioEnum tipoUsuario,
-            String cpf,
+            TipoUsuario tipoUsuario,
+            Long cpf,
             String email,
-            GeneroEnum genero,
+            Genero genero,
             Date dataNascimento,
             String telefone,
             String celular,
@@ -66,6 +74,12 @@ public class Usuario implements Serializable {
 
 
     public Usuario() {}
+
+    public String getCpfFormatado(){
+        String cpf = String.valueOf(this.cpf);
+        return cpf.substring(0,3)+"."+cpf.substring(3,6)+"."+cpf.substring(6,9)+"-"+cpf.substring(9,11);
+    }
+
 
     @Override
     public boolean equals(Object o) {
