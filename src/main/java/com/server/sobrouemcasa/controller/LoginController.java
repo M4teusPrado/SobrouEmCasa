@@ -8,6 +8,7 @@ import com.server.sobrouemcasa.model.Usuario;
 import com.server.sobrouemcasa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,6 +32,9 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @PostMapping()
     public  ResponseEntity<Usuario> login(@RequestBody Usuario usuario){
         return ResponseEntity.ok().body(loginService.login(usuario.getEmail(), usuario.getSenha()));
@@ -44,6 +48,7 @@ public class LoginController {
 
     @PostMapping("/cadastrar/pj")
     public ResponseEntity<Ong> cadastrar(@Valid @RequestBody Ong ong) throws IOException {
+        ong.setSenha(encoder.encode(ong.getSenha()));
         integracaoViaCep(ong);
         return ResponseEntity.ok().body(ongService.cadastroOng(ong));
     }

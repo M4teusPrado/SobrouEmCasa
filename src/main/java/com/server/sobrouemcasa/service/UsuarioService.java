@@ -21,6 +21,7 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> getUsuarioByEmail(Usuario usuario) { return usuarioRepository.findByEmail(usuario.getEmail());}
+
     public Optional<Usuario> getUsuarioByCpf(Usuario usuario) { return usuarioRepository.findByCpf(usuario.getCpf());}
 
     public Usuario saveUsuario(Usuario usuario) {
@@ -30,8 +31,4 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
-
-    public Optional<Usuario> getDoadorByEmail(String email, String senha) { return usuarioRepository.findOneByEmailIgnoreCaseAndSenha(email,senha);}
-
-    public Optional<Usuario> getUsuarioById(Long id) { return usuarioRepository.findById(id);}
 }
